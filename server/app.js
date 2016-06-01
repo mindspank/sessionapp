@@ -28,6 +28,7 @@ module.exports = {
       app.use(express.static(path.join(__dirname, 'public')));
       app.use('/qsocks', express.static(path.join(__dirname, '../node_modules/qsocks')));
       app.use('/jquery', express.static(path.join(__dirname, '../node_modules/jquery')));
+      app.use('/d3', express.static(path.join(__dirname, '../node_modules/d3')));
 
       /**
        * Routes
