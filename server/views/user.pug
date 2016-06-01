@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body
+    header
+      h1 Qlik Sense On-Demand Flash Apps
+    #container
+    script.
+        var config = !{JSON.stringify(config)}
+    script(src='/qsocks/qsocks.bundle.js')
+    script(src='/jquery/dist/jquery.min.js')
+    script(src='/javascripts/user.js')

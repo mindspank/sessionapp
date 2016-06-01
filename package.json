@@ -1,29 +1,26 @@
 {
-  "name": "sessionapp",
+  "name": "objectopng",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "fs-extra": "^0.30.0",
+    "jquery": "^2.2.4",
+    "less-middleware": "^2.1.0",
+    "pug": "^2.0.0-alpha8",
+    "qsocks": "^2.2.11",
+    "request": "^2.72.0",
+    "request-promise": "^3.0.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mindspank/sessionapp.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mindspank/sessionapp/issues"
-  },
-  "homepage": "https://github.com/mindspank/sessionapp#readme",
-  "dependencies": {
-    "express": "^4.13.4",
-    "qsocks": "^2.2.7",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.4.1",
-    "redux": "^3.5.2",
-    "request": "^2.72.0"
-  }
+  "license": "ISC"
 }

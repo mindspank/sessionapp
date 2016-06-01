@@ -1,0 +1,121 @@
+@font-face {
+	font-family: 'QlikView Sans';
+	src: url(../../css/../fonts/qlikview-sans.ttf) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'QlikView Sans';
+	src: url(../../css/../fonts/qlikview-sans-bold.ttf) format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'QlikView Sans';
+	src: url(../../css/../fonts/qlikview-sans-italic.ttf) format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'QlikView Sans';
+	src: url(../../css/../fonts/qlikview-sans-bold-italic.ttf) format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'QlikView Icons';
+	src: url(../../css/../fonts/qlikview-icons.ttf) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+  background: #fff;
+  margin: 0;
+  font-family: system, -apple-system, '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(0,0%,98%);
+}
+
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid hsl(0,0%,88%);
+  padding-left: 20px;
+  text-align: center;
+  background-color: hsl(0,0%,98%);
+  z-index: 100;
+  
+  h1 {
+    font-size: 32px;
+    line-height: 70px;
+    font-weight: 200;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  } 
+}
+
+#intro {
+  margin-top: 70px;
+  padding: 40px 0;
+  text-align: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  h3 {
+    margin: 0;
+    font-weight: 200;
+    max-width: 600px;
+  }
+  
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 960px;
+  margin: 0 auto;
+  justify-content: center;
+  
+  & > * {
+    flex: 1 1 auto;
+  }
+  
+  .user {
+    flex: 1 1 200px;
+    max-width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    background: #fff;//linear-gradient(to right, hsl(116, 30%, 36%) 0%, hsl(194, 60%, 36%) 14%, hsl(222, 53%, 50%) 28%, hsl(285, 47%, 46%) 42%, hsl(330, 65%, 48%) 56%, hsl(32, 79%, 49%) 70%, hsl(53, 84%, 50%) 84%, hsl(116, 30%, 36%) 100%);
+    border: 1px solid #eee;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    
+    p {
+      font-size: 24px;
+      line-height: 26px;
+      background: #fff;
+      font-weight: 600;
+      color: rgb(36, 121, 147);
+    }
+    
+  }
+  
+}
