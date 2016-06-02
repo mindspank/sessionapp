@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:userid', (req, res, next) => {
     
-    if ( USER_LIST.indexOf(req.params.userid) === -1 ) {
+    if ( USER_LIST.map(d => d.id).indexOf(req.params.userid) === -1 ) {
         res.status(403).send('Not a valid user').end();
     };
         
@@ -29,23 +29,21 @@ router.get('/:userid', (req, res, next) => {
             identity: result.identity,
             isSecure: true,
             prefix: config.prefix
-        }});
+        }, user: USER_LIST.filter(d => d.id === req.params.userid), objectid: ['dataobject', 'listobject'] });
     })
     
 });
 
 router.get('/:userid/:appid', (req, res, next) => {
-    console.log( 'in app id' )
-    if ( USER_LIST.indexOf(req.params.userid) === -1 ) {
+
+    if ( USER_LIST.map(d => d.id).indexOf(req.params.userid) === -1 ) {
         res.status(403).send('Not a valid user').end();
     };
-    
-    
         
     const sessionId = generateId();
     
     postSession( req.params.userid, sessionId )
-    .then( () => generateSessionAppFromApp( req.params.userid, sessionId, templateId ) )
+    .then( () => generateSessionAppFromApp( req.params.userid, sessionId ) )
     .then( result => {
         res.cookie(config.cookieName, sessionId, { expires: 0, httpOnly: true });
         res.render('user', { config: {
@@ -53,7 +51,7 @@ router.get('/:userid/:appid', (req, res, next) => {
             identity: result.identity,
             isSecure: true,
             prefix: config.prefix
-        }});
+        }, user: USER_LIST.filter(d => d.id === req.params.userid), objectid: ['ueeqaKY'] });
     })
     
 });

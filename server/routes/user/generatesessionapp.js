@@ -1,6 +1,10 @@
 const qsocks = require('qsocks');
+const fs = require('fs');
+const Promise = require('bluebird');
+const path = require('path');
 const config = require('../../../config');
 const generateId = require('../../utils/generateId');
+const objects = require('../../sensedata/objects');
 
 module.exports = (user, id) => {
     
@@ -22,34 +26,14 @@ module.exports = (user, id) => {
         .then( (app) => {
             return app.setScript( script() )
             .then( () => app.doReload() )
-            .then( () => app.createObject(datadef) )
+            .then( () => {
+                return Promise.all(objects.map(d => app.createObject(d)))
+            })
             .then( () => app.getAppProperties().then( (props) => ({properties: props, identity: qsocksconfig.identity}) ));
         }).catch(err => console.log(err))
 
 };
 
 function script(term) {
-    return "LIB CONNECT TO 'twitter (qtsel_akl)'; SQL SELECT * FROM Search where ?q=qlik;";
-};
-
-const datadef = {
-    qInfo: {
-        qType: 'myobj',
-        qId: 'dataobject'
-    },
-    qHyperCubeDef: {
-        qDimensions: [{
-            "qNullSuppression": false,
-            "qDef": {
-              "qFieldDefs": ['text']
-            }
-        }],
-        qMeasures: [],
-        qInitialDataFetch: [{
-            qTop: 0,
-            qLeft: 0,
-            qWidth: 5,
-            qHeight: 2000
-        }]
-    }
+    return fs.readFileSync(path.resolve(__dirname, '../../sensedata/loadscript.txt'), 'utf-8');
 };

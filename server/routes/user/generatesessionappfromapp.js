@@ -4,6 +4,8 @@ const generateId = require('../../utils/generateId');
 
 module.exports = (user, id, appid) => {
     
+    const template = appid || 'bcc93229-67ef-460e-b3c7-e3a6e3766eda';
+    
     let qsocksconfig = {
         host: config.hostname,
         isSecure: config.isSecure,
@@ -18,7 +20,7 @@ module.exports = (user, id, appid) => {
     };
 
     return qsocks.Connect(qsocksconfig)
-        .then( (global) => global.createSessionAppFromApp(appid) )
+        .then( (global) => global.createSessionAppFromApp(template) )
         .then( (app) => {
             return app.doReload()
             .then( () => app.getAppProperties().then( (props) => ({properties: props, identity: qsocksconfig.identity}) ));

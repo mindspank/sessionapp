@@ -1,0 +1,119 @@
+SET ThousandSep=' ';
+SET DecimalSep=',';
+SET MoneyThousandSep='.';
+SET MoneyDecimalSep=',';
+SET MoneyFormat='#.##0,00 kr;-#.##0,00 kr';
+SET TimeFormat='hh:mm:ss';
+SET DateFormat='YYYY-MM-DD';
+SET TimestampFormat='YYYY-MM-DD hh:mm:ss[.fff]';
+SET FirstWeekDay=0;
+SET BrokenWeeks=0;
+SET ReferenceDay=4;
+SET FirstMonthOfYear=1;
+SET CollationLocale='sv-SE';
+SET MonthNames='jan;feb;mar;apr;maj;jun;jul;aug;sep;okt;nov;dec';
+SET LongMonthNames='januari;februari;mars;april;maj;juni;juli;augusti;september;oktober;november;december';
+SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+SET LongDayNames='måndag;tisdag;onsdag;torsdag;fredag;lördag;söndag';
+
+let connection = 'runtastic (qtsel_akl)';
+let User= SubField(OSUser(),'=',3);
+
+[Sessions]:
+Load *,
+Month(StartDate) as StartMonth,
+Year(StartDate) as StartYear,
+Weekday(StartDate) as StartWeekDay
+;
+LOAD 
+[user_id],
+[average_speed],
+[average_speed_rva],
+[calories],
+[country_id],
+[distance],
+[duration],
+[duration_per_km],
+[duration_rva],
+[elevation_gain],
+[elevation_loss],
+[end_time],
+[latitude],
+[longitude],
+[pulse_avg],
+[pulse_max],
+[sport_type_id],
+Date(Date#(left(start_time,10), 'DD.MM.YYYY')) as StartDate,
+[start_time],
+[start_time_date],
+[start_time_hour],
+[start_time_month],
+[start_time_week],
+[start_time_weekday],
+[start_time_year],
+[subjective_feeling_id],
+[surface_id],
+[time_per_km],
+[time_per_km_Bucket],
+[TimeOfDay],
+[weather_condition_id]
+FROM [lib://$(connection)/Session$(User).csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+Qualify *;
+
+Unqualify '*_id';
+
+[Sports]:
+LOAD 
+num(num#(replace(id,'(',''),'#########0'))  as sport_type_id,
+name, 
+num(num#(max_speed,'#:##0.000','.',':')) as max_speed, 
+localization, 
+display_order, 
+has_sub_types, 
+parent_id, 
+num(num#(avg_speed,'#:##0.000','.',':')) as avg_speed, 
+default_indoor
+FROM [lib://$(connection)/sports.csv]
+(txt, codepage is 1252, embedded labels, delimiter is ',', msq);
+
+[subjective_feelings]:
+LOAD 
+id as subjective_feeling_id, 
+name, 
+description, 
+localization, 
+localization_description, 
+position
+FROM [lib://$(connection)/subjective_feelings.csv]
+(txt, codepage is 1252, embedded labels, delimiter is ',', msq);
+
+[surfaces]:
+LOAD 
+id as surface_id, 
+name, 
+localization, 
+position
+FROM [lib://$(connection)/surfaces.csv]
+(txt, codepage is 1252, embedded labels, delimiter is ',', msq);
+
+[weather]:
+LOAD 
+id as weather_condition_id, 
+name, 
+description, 
+localization, 
+localization_description, 
+position
+FROM [lib://$(connection)/weather.csv]
+(txt, codepage is 1252, embedded labels, delimiter is ',', msq);
+
+Country:
+LOAD 
+num(num#(replace(id,'(',''),'#########0'))  as country_id,
+name, 
+replace(replace(iso,')',''),chr(39),'') as iso
+FROM
+[lib://$(connection)/country.csv]
+(txt, codepage is 1252, embedded labels, delimiter is ',',no eof);
