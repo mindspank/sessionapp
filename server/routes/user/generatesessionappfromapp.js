@@ -4,7 +4,7 @@ const generateId = require('../../utils/generateId');
 
 module.exports = (user, id, appid) => {
     
-    const template = appid || 'bcc93229-67ef-460e-b3c7-e3a6e3766eda';
+    const template = appid || config.template;
     
     let qsocksconfig = {
         host: config.hostname,

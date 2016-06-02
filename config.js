@@ -6,6 +6,7 @@ var certPath = 'C:\\ProgramData\\Qlik\\Sense\\Repository\\Exported Certificates\
 var config = extend(true, {
 	
 	port: 3000,
+	template: 'bcc93229-67ef-460e-b3c7-e3a6e3766eda',
     cookieName: 'X-Qlik-Session-OnDemand',
     prefix: 'ondemand',
     origin: 'https://localhost:3000',
