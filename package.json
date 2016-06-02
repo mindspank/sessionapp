@@ -1,5 +1,5 @@
 {
-  "name": "objectopng",
+  "name": "sessionapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,13 +9,11 @@
     "cookie-parser": "^1.4.3",
     "d3": "^3.5.17",
     "express": "^4.13.4",
-    "express-session": "^1.13.0",
     "fs-extra": "^0.30.0",
     "jquery": "^2.2.4",
     "less-middleware": "^2.1.0",
     "pug": "^2.0.0-alpha8",
     "qsocks": "^2.2.11",
-    "request": "^2.72.0",
     "request-promise": "^3.0.0"
   },
   "devDependencies": {},
