@@ -14,7 +14,7 @@ let config = require('../config')
 
 module.exports = {
   start: function () {
-    Promise.all([certificates(), hostname()]).then(() => {
+    return Promise.all([certificates(), hostname()]).then(() => {
       
       const app = express();
       const router = express.Router();
@@ -35,6 +35,11 @@ module.exports = {
        */
       app.use('/', require('./routes/index'));
       app.use('/user', require('./routes/user/user'));
+      
+      /**
+       * Validate session when QPS asks for it.
+       * Client > Server > Server posts session to QPS > QPS calls back verifying sesssion > Return true
+       */
       app.get('/session/:sid', function(req, res) {
         var obj = cache.get(req.params.sid)
         res.send(obj);
@@ -42,18 +47,22 @@ module.exports = {
 
       app.use(function (err, req, res, next) {
         res.status(err.status || 500);
-        console.dir(err)
         res.render('error', {
           message: err.message,
           error: err
         });
       });
-
-      https.createServer({
-        ca: [config.certificates.root],
-        cert: config.certificates.server,
-        key: config.certificates.server_key
-      }, app).listen(config.port, config.hostname)
+      
+      if( config.useHTTPS ) {
+        https.createServer({
+          ca: [config.certificates.root],
+          cert: config.certificates.server,
+          key: config.certificates.server_key
+        }, app).listen(config.port, config.hostname)
+      } else {
+        app.listen(config.port, config.hostname);
+      }
+      
 
     });
   }

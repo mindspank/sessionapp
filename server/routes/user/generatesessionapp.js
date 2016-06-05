@@ -20,7 +20,9 @@ module.exports = (user, id) => {
             'Content-Type': 'application/json'
         }
     };
-
+    
+    console.log(id)
+    
     return qsocks.Connect(qsocksconfig)
         .then( (global) => global.createSessionApp() )
         .then( (app) => {

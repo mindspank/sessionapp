@@ -27,7 +27,7 @@ router.get('/:userid', (req, res, next) => {
         res.render('user', { config: {
             host: config.hostname,
             identity: result.identity,
-            isSecure: true,
+            isSecure: config.isSecure,
             prefix: config.prefix
         }, user: USER_LIST.filter(d => d.id === req.params.userid), objectid: ['dataobject', 'listobject'] });
     })
@@ -49,7 +49,7 @@ router.get('/:userid/:appid', (req, res, next) => {
         res.render('user', { config: {
             host: config.hostname,
             identity: result.identity,
-            isSecure: true,
+            isSecure: config.isSecure,
             prefix: config.prefix
         }, user: USER_LIST.filter(d => d.id === req.params.userid), objectid: ['ueeqaKY'] });
     })

@@ -11,7 +11,9 @@ html
       h2 Hello #{user[0].name}
       h3 These are your stats
       #filters
+      #reload
       #visualizations
+        #calories
     script.
         var config = !{JSON.stringify(config)}
         var user = !{JSON.stringify(user)}
