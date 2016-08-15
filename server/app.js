@@ -1,5 +1,5 @@
 const express = require('express');
-const https = require('https')
+const https = require('https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const lessMiddleware = require('less-middleware');
@@ -84,6 +84,7 @@ module.exports = {
         app.listen(config.port, config.hostname);
       }
       
+      console.log('Server listening on: ' + config.hostname + ':' + config.port)
 
     });
   }

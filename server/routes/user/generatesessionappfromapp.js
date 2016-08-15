@@ -12,6 +12,7 @@ module.exports = (user, id, appid) => {
         prefix: config.prefix,
         origin: config.origin,
         identity: generateId(),
+        appname: config.appname,
         rejectUnauthorized: false,
         headers: {
             'Cookie': config.cookieName + '=' + id,

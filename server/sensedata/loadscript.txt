@@ -16,7 +16,7 @@ SET LongMonthNames='januari;februari;mars;april;maj;juni;juli;augusti;september;
 SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
 SET LongDayNames='måndag;tisdag;onsdag;torsdag;fredag;lördag;söndag';
 
-let connection = 'runtastic (qtsel_akl)';
+let connection = 'runtastic';
 let User= SubField(OSUser(),'=',3);
 
 [Sessions]:

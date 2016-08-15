@@ -14,6 +14,7 @@ module.exports = (user, id) => {
         prefix: config.prefix,
         origin: config.origin,
         identity: generateId(),
+        appname: config.appname,
         rejectUnauthorized: false,
         headers: {
             'Cookie': config.cookieName + '=' + id,
@@ -21,10 +22,14 @@ module.exports = (user, id) => {
         }
     };
     
-    console.log(id)
+    console.log(id, qsocksconfig)
     
     return qsocks.Connect(qsocksconfig)
-        .then( (global) => global.createSessionApp() )
+        .then( (global) => {
+            console.log(global)
+
+            return global.createSessionApp() 
+        })
         .then( (app) => {
             return app.setScript( script() )
             .then( () => app.doReload() )

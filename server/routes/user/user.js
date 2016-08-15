@@ -23,6 +23,7 @@ router.get('/:userid', (req, res, next) => {
     postSession( req.params.userid, sessionId )
     .then( () => generateSessionApp( req.params.userid, sessionId ) )
     .then( result => {
+        console.log(result)
         res.cookie(config.cookieName, sessionId, { expires: 0, httpOnly: true });
         res.render('user', { config: {
             host: config.hostname,
@@ -31,6 +32,7 @@ router.get('/:userid', (req, res, next) => {
             prefix: config.prefix
         }, user: USER_LIST.filter(d => d.id === req.params.userid), objectid: ['dataobject', 'listobject'] });
     })
+    .catch(err => console.log(err));
     
 });
 

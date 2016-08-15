@@ -9,9 +9,9 @@ var config = extend(true, {
 	 * Server config
 	 */
 	port: 3000, // Web GUI port
-	useHTTPS: false, // Use HTTP or HTTPs Server
+	useHTTPS: true, // Use HTTP or HTTPs Server
 	template: 'bcc93229-67ef-460e-b3c7-e3a6e3766eda', // Default template GUID
-    cookieName: 'X-Qlik-Session-OnDemand', // Cookie name assigned for virtual proxy
+    cookieName: 'X-Qlik-Session', // Cookie name assigned for virtual proxy
     origin: 'http://localhost:3000', // Your server origin - Needs a corresponding entry in virtual proxy white list
 
 	hostfile: 'C:/ProgramData/Qlik/Sense/Host.cfg',
@@ -29,8 +29,9 @@ var config = extend(true, {
 	 * Client side properties
 	 * Also uses config.hostname
 	 */
-	prefix: 'ondemand',
-    isSecure: false   
+	prefix: '/',
+    isSecure: true,
+	appname: 'engineData'
     	
 });
 

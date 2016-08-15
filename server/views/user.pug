@@ -4,6 +4,7 @@ html
     title= title
     meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
     link(rel='stylesheet', href='/stylesheets/user.css')
+    link(rel='stylesheet', href='/stylesheets/qlik-styles.css')
   body
     header
       h1 Qlik Sense On-Demand Flash Apps
@@ -14,11 +15,11 @@ html
       #reload
       #visualizations
         #calories
+        #calories2
     script.
         var config = !{JSON.stringify(config)}
         var user = !{JSON.stringify(user)}
         var objectid = !{JSON.stringify(objectid)}
-    script(src='/qsocks/qsocks.bundle.js')
     script(src='/jquery/dist/jquery.min.js')
-    script(src='/d3/d3.min.js')
+    script(src='https://localhost/resources/assets/external/requirejs/require.js')
     script(src='/javascripts/user.js')
