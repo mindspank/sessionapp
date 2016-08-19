@@ -1,5 +1,4 @@
 const express = require('express');
-const https = require('https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const lessMiddleware = require('less-middleware');
@@ -75,6 +74,7 @@ module.exports = {
        * Start Server
        */
       if( config.useHTTPS ) {
+        const https = require('https');
         https.createServer({
           ca: [config.certificates.root],
           cert: config.certificates.server,

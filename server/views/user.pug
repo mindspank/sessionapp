@@ -21,5 +21,6 @@ html
         var user = !{JSON.stringify(user)}
         var objectid = !{JSON.stringify(objectid)}
     script(src='/jquery/dist/jquery.min.js')
-    script(src='https://localhost/resources/assets/external/requirejs/require.js')
-    script(src='/javascripts/user.js')
+    script.
+        var host = window.location.hostname
+        $('head').append('<script data-main="/javascripts/user.js" src="//'+ host +'!{config.prefix}resources/assets/external/requirejs/require.js">')

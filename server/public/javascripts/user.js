@@ -1,18 +1,18 @@
 var capabilitiesconfig = {
 	host: window.location.hostname,
-	prefix: "/",
-	port: 443,
+	prefix: config.prefix,
+	port: config.isSecure ? 443 : 80,
     identity: config.identity,
-	isSecure: true
+	isSecure: config.isSecure
 };
 require.config({
-	baseUrl: "https://localhost/resources"
+	baseUrl: (capabilitiesconfig.isSecure ? 'https://' : 'http://') + window.location.hostname + "/ondemand/resources"
 });
 
 require( ['js/qlik', 'jquery'], function ( qlik, $ ) {
 
     QlikUseActive = true;
-    var app = qlik.openApp('engineData', capabilitiesconfig);
+    var app = qlik.openApp('8e6da2eb-c72d-44da-a4b0-ac0e905b6487', capabilitiesconfig);
 
     app.clearAll();
 
