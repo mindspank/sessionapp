@@ -19,7 +19,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "start": "node index.js",
+      "install-windows-service": "winser -i",
+      "uninstall-windows-service": "winser -r"
   },
   "author": "",
   "license": "ISC"
