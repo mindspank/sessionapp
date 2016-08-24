@@ -16,7 +16,8 @@ SET LongMonthNames='januari;februari;mars;april;maj;juni;juli;augusti;september;
 SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
 SET LongDayNames='måndag;tisdag;onsdag;torsdag;fredag;lördag;söndag';
 
-let connection = 'runtastic';
+
+let connection = 'data';
 let User= SubField(OSUser(),'=',3);
 
 [Sessions]:
@@ -24,12 +25,13 @@ Load *,
 Month(StartDate) as StartMonth,
 Year(StartDate) as StartYear,
 Weekday(StartDate) as StartWeekDay
+
 ;
 LOAD 
 [user_id],
 [average_speed],
 [average_speed_rva],
-[calories],
+[calories] * (rand() * rand()) as [calories],
 [country_id],
 [distance],
 [duration],
@@ -117,3 +119,18 @@ replace(replace(iso,')',''),chr(39),'') as iso
 FROM
 [lib://$(connection)/country.csv]
 (txt, codepage is 1252, embedded labels, delimiter is ',',no eof);
+
+[std]: 
+
+	 DECLARE FIELD DEFINITION Tagged ('$date') // Sort order
+FIELDS
+  Dual(Year(StartDate), YearStart(StartDate)) AS [Year] Tagged ('$axis', '$year'),
+  Dual('Q'&Num(Ceil(Num(Month(StartDate))/3)),Num(Ceil(NUM(Month(StartDate))/3),00)) AS [Quarter] Tagged ('$quarter'),
+  Dual(Year(StartDate)&'-Q'&Num(Ceil(Num(Month(StartDate))/3)),QuarterStart(StartDate)) AS [YearQuarter] Tagged ('$axis', '$yearquarter'),
+  Month(StartDate) AS [Month] Tagged ('$month'),
+  Dual(Year(StartDate)&'-'&Month(StartDate), monthstart(StartDate)) AS [YearMonth] Tagged ('$axis', '$yearmonth'),
+  Dual(W&Num(Week(StartDate),00), Num(Week(StartDate),00)) AS [Week] Tagged ('$weeknumber'),
+  Day(StartDate) as Day Tagged '$day',
+  Date(floor(StartDate)) as Date Tagged '$date';
+
+Derive Fields from Fields Sessions Using [std];

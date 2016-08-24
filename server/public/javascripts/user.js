@@ -38,7 +38,6 @@ require( ['js/qlik', 'jquery'], function ( qlik, $ ) {
         '=Sum(calories)'
     ])
     .then(model => {
-        console.log(model)
         model.show('calories')
     });
 
@@ -47,7 +46,6 @@ require( ['js/qlik', 'jquery'], function ( qlik, $ ) {
         '=Sum(calories)'
     ])
     .then(model => {
-        console.log(model)
         model.show('calories2')
     });    
 
