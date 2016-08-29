@@ -12,6 +12,7 @@ require.config({
 require( ['js/qlik', 'jquery'], function ( qlik, $ ) {
 
     QlikUseActive = true;
+    var isReloading = false;
     var app = qlik.openApp('8e6da2eb-c72d-44da-a4b0-ac0e905b6487', capabilitiesconfig);
 
     app.clearAll();
@@ -50,7 +51,12 @@ require( ['js/qlik', 'jquery'], function ( qlik, $ ) {
     });    
 
     $('<button> Get new data </button>').on('click', () => {
-    app.doReload().then(() => $('select').val('default'));
+        if (isReloading) return;
+        isReloading = true;
+        app.doReload().then(() => {
+            isReloading = false;
+            $('select').val('default')
+        });
     }).appendTo($('#reload'));
 
     $('<button> Clear Selections </button>').on('click', () => {
